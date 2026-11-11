@@ -1,250 +1,367 @@
-# KimTech Premium Fashion Storefront
+# KimTech — Premium Fashion Storefront
 
-A responsive, single-page fashion storefront built with HTML, CSS and JavaScript. It is designed for fashion brands, clothing boutiques and online stores that want a polished storefront with product discovery and a WhatsApp-based order flow.
-
-> **Please note:** this is a front-end template. It does not include a backend, database, customer accounts, inventory management or a card / mobile-money payment gateway. Orders are sent through WhatsApp. See [Limitations](#limitations).
-
----
-
-## Contents
-
-- [Features](#features)
-- [Package contents](#package-contents)
-- [Quick start](#quick-start)
-- [Configuration](#configuration)
-- [Customization](#customization)
-- [WhatsApp ordering](#whatsapp-ordering)
-- [Currency and pricing](#currency-and-pricing)
-- [Shipping](#shipping)
-- [Publishing](#publishing)
-- [Before-launch checklist](#before-launch-checklist)
-- [Limitations](#limitations)
-- [Support and customization](#support-and-customization)
-- [License](#license)
+> **A single-file, dependency-free e-commerce storefront for premium fashion.**
+> Built with vanilla HTML, CSS, and JavaScript — designed to feel like a boutique, not a template.
 
 ---
 
-## Features
+## 📖 Overview
 
-- Responsive layout for desktop, tablet and mobile
-- Premium fashion presentation with a calm, minimal design
-- Animated logo wordmark
-- Product cards with portrait images and an optional hover image swap
-- Quick-view panel with size selector and size guide
-- Side cart drawer with quantity controls, a free-shipping progress bar and "Complete the look" suggestions
-- Wishlist, remembered between visits
-- Sorting by price
-- Light and dark mode with a toggle (follows the visitor's device setting first)
-- Scroll-reveal animations (disabled automatically for visitors who prefer reduced motion)
-- Checkout form with contact, delivery and payment-preference fields
-- Shipping-cost calculation by country, with a free-shipping threshold
-- WhatsApp order-request flow
-- Accessibility support: keyboard navigation, focus handling in dialogs, labelled controls
-- Easy-to-edit HTML, CSS and JavaScript in a single file
+KimTech is a **complete, self-contained fashion storefront** that runs from a single `index.html` file. No build step, no framework, no npm install. Open it in a browser and it works.
+
+It's designed around a **WhatsApp-first checkout model** — perfect for independent boutiques, fashion entrepreneurs, and small brands who want a beautiful storefront without the complexity and monthly fees of Shopify or WooCommerce.
+
+The entire shopping experience — browsing, filtering, cart management, wishlist, quick view, promo codes, currency conversion, and order submission — happens client-side, then hands off to WhatsApp with a **pre-formatted order message** the moment the customer is ready to buy.
 
 ---
 
-## Package contents
+## ✨ Features at a Glance
 
-```
-KimTech-Premium-Fashion/
-├── index.html     The complete storefront (HTML, CSS and JavaScript)
-└── README.md      This file
-```
-
-The template is delivered as a self-contained HTML file. If your package includes additional assets or documentation, keep the supplied folder structure intact.
-
-**Loaded from the internet:** Google Fonts (Cormorant Garamond and Inter), Remix Icon, and the demo product photos. The storefront needs an internet connection to display these correctly.
-
----
-
-## Quick start
-
-1. Download and extract the package.
-2. Open `index.html` in a modern web browser to preview the storefront.
-3. Edit the settings and content described below.
-4. Upload the files to a static web host to publish (see [Publishing](#publishing)).
-
-No build tools or package installation are required.
-
----
-
-## Configuration
-
-Open `index.html` in a code editor and scroll to the `<script>` near the bottom. The block marked **Settings (edit here)** controls the main store options:
-
-| Setting | What it controls |
+### 🛍️ Shopping Experience
+| Feature | Description |
 |---|---|
-| `WA_NUMBER` | Your WhatsApp business number (digits only, with country code) |
-| `FREE_SHIP_MIN` | Order value that unlocks free shipping, **in cents** (`15000` = $150.00) |
-| `SHIPPING` | Shipping rate per country, **in cents** |
-| `COUNTRY_NAMES` | Display names for the countries in the checkout dropdown |
-| `CLOTHING_SIZES` | Sizes offered for clothing (accessories use "One size") |
-| `SIZE_GUIDE` | The size chart shown in quick view |
-| `products` | Your product catalogue |
+| **Multi-currency display** | 13 currencies (KES, USD, EUR, GBP, JPY, and more) with locale-aware formatting |
+| **Product grid** | 24 demo products across Men / Women / Accessories with hover image swap |
+| **Advanced filtering** | Live search + price bands + size filter, all combinable |
+| **Sorting** | Featured, price low→high, price high→low |
+| **Category navigation** | Nav links, footer links, and clickable category cards |
+| **Recently viewed** | Persistent strip tracks the last 6 products you opened |
+
+### 🛒 Cart & Wishlist
+| Feature | Description |
+|---|---|
+| **Slide-out cart drawer** | Add/remove/adjust quantities without leaving the page |
+| **Live subtotal** | Updates on every change in your selected currency |
+| **Free-shipping progress bar** | Visual nudge toward the free-shipping threshold |
+| **Persistent cart** | Survives page refresh via `localStorage` |
+| **Wishlist drawer** | Heart icon in header with count badge; add-to-cart directly from wishlist |
+| **Upsell suggestions** | "Complete the look" accessories appear in cart drawer |
+
+### 🎨 Product Cards
+| Feature | Description |
+|---|---|
+| **Hover image swap** | Second photo crossfades in on hover (desktop) |
+| **Flag badges** | Sale / New / Bestseller / Limited |
+| **Stock states** | "Sold out" overlay, "Only N left" urgency note |
+| **Color swatches** | See available colors directly on the grid tile |
+| **Quick view** | Full-size image gallery, size guide, color picker, share button |
+| **Broken image fallback** | Elegant SVG placeholder — no broken-image icons, ever |
+
+### 💳 Checkout & Ordering
+| Feature | Description |
+|---|---|
+| **WhatsApp order submission** | Formatted message with items, subtotal, shipping, discount, gift wrap, ETA |
+| **Promo codes** | `WELCOME10` (10%), `VIP20` (20%), `FREESHIP` |
+| **Gift wrap option** | +$5 add-on, reflected in total and WhatsApp message |
+| **Fit preference** | Regular / Slim / Relaxed — carried into the order message |
+| **Delivery ETA** | Country-specific estimate ("5–8 business days") shown pre-purchase |
+| **Per-country shipping rates** | 17 destinations with independent shipping cost |
+| **Payment method selector** | M-Pesa (Kenya), bank transfer, cash on delivery, or "other" |
+| **Form validation** | Inline errors, focus management, no page reload |
+
+### 🎁 Polish & Accessibility
+| Feature | Description |
+|---|---|
+| **Dark mode** | Toggle in header, persists via `localStorage`, respects `prefers-color-scheme` |
+| **Reduced-motion support** | Respects `prefers-reduced-motion` throughout |
+| **Keyboard-first** | Full tab navigation, `Escape` closes overlays, focus trapped inside modals |
+| **Screen-reader friendly** | `aria-label`, `aria-pressed`, `aria-live`, `role="dialog"`, `sr-only` helpers |
+| **Semantic markup** | Single `<a>` per card (avoids 120+ tab stops on a 24-product grid) |
+| **Lazy-loaded images** | `loading="lazy"` + explicit width/height (no layout shift) |
+| **Scroll-reveal animations** | Subtle fade-up, disabled for reduced-motion users |
+| **Toast notifications** | Non-blocking feedback for cart and wishlist actions |
 
 ---
 
-## Customization
+## 🚀 Quick Start
 
-### Store name, logo and branding
+### 1. Download the file
+Save the HTML file as `index.html`.
 
-Search for `KimTech` in `index.html` and replace it with your brand name. It appears in:
+### 2. Configure your store
+Open `index.html` in any text editor. At the top of the `<script>` block, find the **Store Settings** section:
 
-- the page title and meta tags in the `<head>`
-- the header logo (set in the script, as `'KimTech'`)
-- the footer
-- the order message sent to WhatsApp
+```js
+/* ===== Store settings ===== */
+const WA_NUMBER = '2547XXXXXXXX'; // ⚠️ REQUIRED: replace with your number
+const FREE_SHIP_MIN = 15000;      // USD cents — 15000 = $150
+```
 
-The animated logo styles the first three letters in bold and the rest in a light weight. Change `i<3` in the logo script to adjust the split.
+**The store will not submit orders until `WA_NUMBER` is set to a real number.**
 
-Also add a favicon and a social-sharing image (see the `TODO` comment in the `<head>`).
+Format: digits only, including country code, **no `+`, no spaces, no dashes.**
+- ✅ `254712345678`
+- ❌ `+254 712 345 678`
+- ❌ `2547XXXXXXXX`
+
+### 3. Test the WhatsApp connection
+Add a product to cart, open checkout, fill the form, and click **Send order via WhatsApp**. You should see a new WhatsApp tab with the pre-formatted order message. If it opens correctly, the store is live.
+
+### 4. Open in a browser
+Double-click `index.html` or serve it locally:
+
+```bash
+# Option A: just open it
+open index.html
+
+# Option B: local server (recommended for localStorage testing)
+python3 -m http.server 8000
+# then visit http://localhost:8000
+```
+
+No build step, no dependencies, no `npm install`. It just works.
+
+---
+
+## ⚙️ Customization
+
+All configuration lives in two blocks at the top of the `<script>`:
+
+### Store settings
+
+```js
+const WA_NUMBER = '254712345678';   // Your WhatsApp business number
+const FREE_SHIP_MIN = 15000;        // $150 USD cents — set to Infinity to disable
+const GIFT_WRAP_USD_CENTS = 500;    // $5 gift wrap add-on
+```
+
+### Shipping rates (per destination, in USD cents)
+
+```js
+const SHIPPING_USD_CENTS = {
+  US: 1000,   // $10
+  GB: 1800,   // $18
+  KE: 2500,   // $25
+  OTHER: 3000 // fallback
+};
+```
+
+### Currencies (indicative FX rates)
+
+```js
+const FX = {
+  USD: 1,
+  KES: 130,   // 130 KES per 1 USD
+  EUR: 0.92,
+  // ...
+};
+```
+
+⚠️ These are **static rates** — update them periodically or replace with a live FX API.
+
+### Delivery estimates
+
+```js
+const ETA = {
+  KE: '1–3 business days',
+  US: '5–8 business days',
+  OTHER: '7–12 business days'
+};
+```
+
+### Promo codes
+
+```js
+const PROMOS = {
+  WELCOME10: { pct: 10, label: '10% off your order' },
+  VIP20:     { pct: 20, label: '20% VIP discount' },
+  FREESHIP:  { ship: 0, label: 'Free shipping' }
+};
+```
+
+Add your own — keys are matched case-insensitively.
 
 ### Products
 
-Each product is an entry in the `products` array:
+The `products` array is the heart of the catalog. Each object supports:
 
 ```js
-{ id: 1, name: 'Oversized Blazer', price: 12900, was: null, img: 'photo.jpg', cat: 'men' }
+{
+  id: 1,
+  name: 'Oversized Blazer',
+  price: 12900,              // USD cents → $129.00
+  was: 15900,                // optional — shows strikethrough + Sale badge
+  img: 'https://...',        // primary image
+  img2: 'https://...',       // optional — hover swap image
+  cat: 'men',                // 'men' | 'women' | 'accessories'
+  flag: 'new',               // optional — 'new' | 'bestseller' | 'limited'
+  stock: 8,                  // integer — 0 = sold out, ≤5 = "Only N left"
+  colors: ['#1a1a1a', ...]   // optional — color swatches on card + QV
+}
 ```
 
-| Field | Description |
+**To add a product**: append to the array.
+**To remove one**: delete it — the cart automatically sanitizes against the array on load.
+
+---
+
+## 🧱 Tech Stack
+
+| Layer | Choice | Why |
+|---|---|---|
+| Markup | **HTML5** | Semantic, accessible, no compilation |
+| Styling | **CSS custom properties** | Themeable via `data-theme="dark"` |
+| Scripting | **Vanilla JavaScript (ES2015+)** | Zero dependencies, ~500 lines |
+| State | **`localStorage`** | Cart + wishlist + recently-viewed + theme persist across sessions |
+| Fonts | **Google Fonts** | Cormorant Garamond (serif) + Inter (sans) |
+| Icons | **Remix Icon CDN** | Single line of HTML |
+| Images | **Unsplash** | Demo content only — replace with your own |
+
+**Total size**: ~95 KB unminified. No frameworks, no bundlers, no runtime.
+
+---
+
+## 📁 File Structure
+
+```
+index.html          ← everything lives here
+  ├── <head>
+  │   ├── Meta tags (SEO, Open Graph, theme-color)
+  │   ├── Theme loader (prevents dark-mode flash)
+  │   ├── Fonts + icons
+  │   └── <style> — ~1,200 lines of CSS
+  ├── <body>
+  │   ├── Header (nav, currency, theme, wishlist, cart)
+  │   ├── Hero section
+  │   ├── Value props strip
+  │   ├── Category cards
+  │   ├── Product section (filter bar, grid, recently viewed)
+  │   ├── Promo banner
+  │   ├── Stats + features
+  │   ├── Footer
+  │   ├── Checkout modal
+  │   ├── Cart drawer
+  │   ├── Wishlist drawer
+  │   ├── Quick view modal
+  │   └── Toast + floating WhatsApp button
+  └── <script> — ~700 lines, single IIFE
+      ├── Store settings (WA_NUMBER, FX, shipping, ETA, promos)
+      ├── Product catalog
+      ├── Utilities (money, escape, storage)
+      ├── State (cart, wishlist, recent, filters)
+      ├── Render functions (products, cart, wishlist)
+      ├── Event handlers (filters, add, remove, checkout)
+      └── Init
+```
+
+Everything in one file means **one HTTPS upload** and you have a store.
+
+---
+
+## ♿ Accessibility Notes
+
+This storefront deliberately exceeds typical template accessibility:
+
+- **Focus trapping** inside every modal and drawer, with `Escape` to close.
+- **ARIA state** on toggles (`aria-pressed`, `aria-expanded`, `aria-hidden`).
+- **Live regions** for cart updates (`aria-live="polite"` on summary).
+- **Single tab stop per product card** — a link wrapper, not five separate interactive elements.
+- **`prefers-reduced-motion`** disables all animations and reveals.
+- **Visible focus rings** via `:focus-visible` with the accent gold color.
+- **Color-independent state** — sold-out uses both color *and* text ("Sold out").
+
+---
+
+## 🌐 Deployment
+
+Because it's a single static file, you can host it anywhere:
+
+| Host | Steps |
 |---|---|
-| `id` | A unique number |
-| `name` | Product name |
-| `price` | Current price **in cents** (`12900` = $129.00) |
-| `was` | Original price in cents for sale items, or `null`. Sale items are tagged and appear under **Sale** automatically. |
-| `img` | Main product image URL |
-| `cat` | `'men'`, `'women'` or `'accessories'` |
-| `img2` | *Optional.* A second image, shown when the visitor hovers over the product |
-| `desc` | *Optional.* A short description (fabric, fit, care), shown in quick view |
+| **GitHub Pages** | Push `index.html` to a repo → Settings → Pages → enable |
+| **Netlify** | Drag-and-drop the file → instant HTTPS URL |
+| **Vercel** | `vercel` in the folder |
+| **Cloudflare Pages** | Upload the file |
+| **Any web host** | FTP the file to `public_html/` |
 
-### Images
-
-- Replace the demo photos with images you own or are licensed to use.
-- Use consistent photography (same lighting, background and crop). Portrait images with a 4:5 ratio work best.
-- Use optimized files (WebP or compressed JPEG) and host them yourself rather than linking to other sites.
-
-### Colors and dark mode
-
-Colors are set as CSS variables at the top of the `<style>` block. Edit the values in `:root` for light mode and in `[data-theme="dark"]` for dark mode.
-
-### Contact details and footer links
-
-Update the demo contact details, social links, policy pages and footer navigation. The Help and About links, and the Privacy and Terms links, are placeholders (`href="#"`) until you point them to real pages. Remove any link or claim that does not apply to your business.
-
-### Placeholder content
-
-Replace or remove the demo statistics (for example "50K+ Happy customers") and any other claims you cannot verify.
+**No server, no database, no backend.**
 
 ---
 
-## WhatsApp ordering
+## 🔒 Security & Privacy Notes
 
-### How it works
-
-1. The customer adds products to the cart and clicks **Checkout**.
-2. They complete the checkout form (contact, delivery and payment preference).
-3. WhatsApp opens with the order details already written in a message.
-4. The customer presses **Send** in WhatsApp. **The order is only placed once you receive the message.**
-5. You confirm the total, payment and delivery with the customer in the chat.
-
-### Setting your number
-
-Find `WA_NUMBER` in the script and replace the placeholder with your business number: country code first, digits only, with no `+`, spaces or leading `0`.
-
-For a Kenyan number such as 0712 345 678, use:
-
-```js
-const WA_NUMBER = '254712345678';
-```
-
-The same number is used for the floating WhatsApp chat button.
-
-### Payment options
-
-The checkout form includes a "Preferred payment method" dropdown (Pay on delivery, Bank transfer, Mobile money). These are examples. Edit the options in the HTML to match how you actually accept payment.
-
-### Test before publishing
-
-Test the whole order flow on both a phone and a desktop computer, including the case where WhatsApp is not installed.
-
-> **Always verify totals yourself.** Prices are calculated in the visitor's browser, so confirm the order total and shipping with the customer before accepting payment.
+- **No analytics** are embedded — add your own (Plausible, Fathom, GA4) as needed.
+- **No cookies** are used — persistence is via `localStorage` only (cart, wishlist, recent, theme).
+- **No payment data** ever touches this page — the customer pays you via whatever method they choose after WhatsApp confirmation.
+- **No customer data** is sent anywhere except the WhatsApp message they explicitly send.
+- Your `WA_NUMBER` is public in the HTML source. Use a **dedicated business WhatsApp number**, not a personal one.
 
 ---
 
-## Currency and pricing
+## ⚠️ Before Launch Checklist
 
-- Prices are stored in cents and displayed with a `$` symbol. To change the currency symbol or format, edit the `money` function in the script.
-- All prices are fixed values that you set. There is no live exchange-rate conversion. If you sell in several markets, update converted prices manually and treat displayed conversions as estimates.
-- Review every product price before launch. Demo prices are sample content.
-
----
-
-## Shipping
-
-- Edit the `SHIPPING` object with rates confirmed by your courier or delivery provider. The demo rates are placeholders.
-- Only the countries listed in `SHIPPING` and `COUNTRY_NAMES` appear in the checkout dropdown. Add or remove countries to match where you deliver.
-- Set `FREE_SHIP_MIN` to your free-shipping threshold, or to a very large number to switch the offer off. If you change it, also update the "Free shipping on orders over $150" text in the top bar and the shipping notice in the quick view.
-- Clearly state your delivery areas, fees, estimated delivery times and conditions on a shipping policy page.
-
----
-
-## Publishing
-
-Because it is a static site, you can publish it with:
-
-- GitHub Pages
-- Netlify
-- Vercel
-- Any web host that supports static HTML files
-
-Upload `index.html` (and any images you host yourself), then connect a custom domain through your hosting provider if you want one. Hosting and domain registration are separate services and are not included with the template.
+- [ ] Replace `WA_NUMBER` with a real business WhatsApp number (digits only, no `+`)
+- [ ] Replace all demo Unsplash images with your own product photos
+- [ ] Add a **favicon** (`<link rel="icon" ...>`)
+- [ ] Add a **canonical URL** (`<link rel="canonical" ...>`)
+- [ ] Add an **OG image** (`<meta property="og:image" content="...">`)
+- [ ] Update `FX` rates to current values (or integrate a live FX API)
+- [ ] Update `SHIPPING_USD_CENTS` with real rates from your carrier
+- [ ] Update `ETA` estimates with real dispatch-to-door timelines
+- [ ] Add **real return / privacy / terms pages** (footer links currently point to `#contact`)
+- [ ] Review the `PROMOS` codes — remove demo codes, add your own
+- [ ] Test the full flow on mobile (iOS Safari + Android Chrome)
+- [ ] Verify the WhatsApp message formatting looks correct on both sender and receiver
+- [ ] Consider adding a `<noscript>` fallback or minimal message for JS-disabled browsers
+- [ ] Run [Lighthouse](https://pagespeed.web.dev/) on the deployed URL
 
 ---
 
-## Before-launch checklist
+## 🧪 Testing the Store
 
-- [ ] Replace the demo brand name and logo
-- [ ] Add a favicon and a social-sharing image
-- [ ] Add your product names, descriptions, prices and images
-- [ ] Replace the demo photos with images you are licensed to use
-- [ ] Set and test your WhatsApp business number
-- [ ] Confirm the currency display and prices for each target market
-- [ ] Confirm shipping rates and delivery coverage
-- [ ] Replace the placeholder size chart with your real measurements
-- [ ] Edit the payment-method options to match how you accept payment
-- [ ] Update contact information and social links
-- [ ] Replace or remove the demo statistics
-- [ ] Add your privacy, returns, refund and shipping policies and link them in the footer
-- [ ] Test the layout on mobile, tablet and desktop
-- [ ] Test quick view, cart, wishlist, dark mode and the WhatsApp order flow
-- [ ] Check all links and remove demo content
-- [ ] Publish the site and test the live URL
+Everything below works in the demo without any configuration (except WhatsApp submission, which requires a real `WA_NUMBER`):
 
----
-
-## Limitations
-
-This is a front-end starting point. Unless separately developed and integrated, it does not provide:
-
-- Secure online payments
-- Server-side order processing
-- Database storage
-- Stock or inventory synchronization
-- Customer registration or login
-- An admin dashboard
-- Automated order emails
-- Live currency conversion
-- Courier API integration
-
-These capabilities require suitable third-party services or custom backend development. The cart and wishlist are saved only in the visitor's own browser.
+| Test | Expected result |
+|---|---|
+| Click **Men** in nav | Grid filters to men's products |
+| Type `jacket` in search | Only jacket products show |
+| Click **Add to wishlist** heart | Header count increments; item appears in wishlist drawer |
+| Click product image | Quick View opens with image gallery |
+| Change Quick View size → **Add to cart** | Cart drawer opens; item appears |
+| Open cart → click **+** on qty | Quantity increments; subtotal updates |
+| Apply `WELCOME10` in checkout | 10% discount row appears; total drops |
+| Apply `FREESHIP` | Shipping becomes `Free` |
+| Select **Gift wrap** in checkout | +$5 row appears in summary |
+| Change country to **United States** | Currency switches to USD; ETA updates |
+| Toggle **dark mode** in header | Theme persists on refresh |
+| Open **Recently viewed** | Last 6 products shown |
+| Toggle sold-out item | "Sold out" flag; Add button disabled |
+| Reload page | Cart, wishlist, recent, theme, currency all persist |
 
 ---
 
-## Support and customization
+## 🛠️ Extending the Store
 
-The template can be adapted to match your brand, product catalogue and business workflow. Customization, deployment, payment integration and backend development can be provided as separate services.
+The single-file design makes extension straightforward:
+
+- **Add a currency** → one entry in `FX` and `CURRENCY_LOCALES`
+- **Add a country** → one entry in `COUNTRY_CONFIG`, `SHIPPING_USD_CENTS`, and `ETA`
+- **Add a promo** → one entry in `PROMOS`
+- **Add a category** → add the `cat` value to products, add to `TITLES`, add a nav link
+- **Add a flag** → pass any string to `flag` (e.g. `'editor's pick'`)
+- **Change brand colors** → edit the `:root` CSS variables at the top of `<style>`
+- **Add product descriptions** → set `desc` on a product; it appears in Quick View
+- **Add a second image for hover** → set `img2`
+
+For larger catalogs, consider:
+- Moving the `products` array to a separate `products.js` file (still no build step)
+- Splitting CSS into `styles.css`
+- Migrating to a static-site generator (Astro, Eleventy) that outputs a single HTML file
+
+---
+
+## 🤝 Why WhatsApp Checkout?
+
+For boutique fashion brands, a full e-commerce backend is often overkill:
+
+- **No payment gateway fees** (2.9% + $0.30 per transaction adds up)
+- **No PCI compliance** burden
+- **No abandoned cart** tracking to build
+- **Conversational trust** — customers can ask questions before paying
+- **Familiar UX** for African, South Asian, and Middle Eastern markets where WhatsApp is the default commerce channel
+- **Instant setup** — no merchant account, no bank integration, no waiting for approval
+
+The tradeoff is manual order processing. For a boutique shipping 10–100 orders per week, that's a feature, not a bug.
 
 ---
 
@@ -257,6 +374,26 @@ The template can be adapted to match your brand, product catalogue and business 
 - You are responsible for making sure that the images, fonts, logos and other assets used on your published store are properly licensed.
 
 ---
+
+---
+
+## 💡 Credits
+
+- Fonts: [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) & [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts
+- Icons: [Remix Icon](https://remixicon.com/)
+- Demo images: [Unsplash](https://unsplash.com/) (replace with your own before launch)
+
+---
+
+<div align="center">
+
+**Built for independent fashion brands who want a storefront that feels like a boutique — not a template.**
+
+[⬆ back to top](#kimtech--premium-fashion-storefront)
+
+</div>
+```
+
 
 **Created by KIMTECH PUBLISHER**
 Digital templates and practical technology resources.
