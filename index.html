@@ -11,7 +11,6 @@
 <meta property="og:description" content="Timeless premium fashion for the modern lifestyle.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_KE">
-<!-- Add your own favicon, canonical URL and real social-sharing image before launch. -->
 <script>document.documentElement.className='js';try{var t=localStorage.getItem('kt_theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,6 +99,15 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
 .category-card:hover .category-content{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,.12)}
 .category-content h3{font-family:var(--font-serif);font-size:20px;font-weight:600}
 .category-content p{font-size:11px;color:var(--text-muted)}
+
+/* ===== Filter bar ===== */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;align-items:center}
+.filter-bar input[type=search]{flex:1;min-width:200px;background:transparent;border:1px solid var(--border-color);color:var(--text-dark);padding:10px 14px;font-size:13px;font-family:inherit;border-radius:0}
+.filter-bar select{background:transparent;color:var(--text-dark);border:1px solid var(--border-color);padding:10px 12px;font-size:12px;font-family:inherit;border-radius:0}
+.filter-bar input[type=search]:focus,.filter-bar select:focus{outline:none;border-color:var(--text-dark)}
+.filter-bar .view-all{margin-left:auto}
+
+/* ===== Products ===== */
 .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .empty-grid{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-muted)}
 .product-card{background:var(--bg-white);position:relative;border-radius:8px;overflow:hidden;transition:transform .35s var(--ease),box-shadow .35s,background-color .3s;box-shadow:0 2px 12px rgba(0,0,0,.04)}
@@ -107,8 +115,8 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
 .product-image{position:relative;height:280px;background:var(--img-bg);overflow:hidden}
 .product-image img{width:100%;height:100%;transition:transform .6s var(--ease)}
 .product-card:hover .product-image img{transform:scale(1.06)}
-.product-badge{position:absolute;top:12px;left:12px;background:#B3261E;color:#fff;padding:4px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-radius:20px}
-.wishlist-btn{position:absolute;top:8px;right:8px;background:#fff;color:#0A1128;border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.1);transition:transform .3s var(--ease)}
+.product-badge{position:absolute;top:12px;left:12px;background:#B3261E;color:#fff;padding:4px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-radius:20px;z-index:1}
+.wishlist-btn{position:absolute;top:8px;right:8px;background:#fff;color:#0A1128;border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.1);transition:transform .3s var(--ease);z-index:2}
 .wishlist-btn:hover{transform:scale(1.12)}
 .wishlist-btn i{font-size:18px}
 .wishlist-btn[aria-pressed="true"]{background:#0A1128;color:#fff}
@@ -126,7 +134,6 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
 .promo-banner .btn-primary{background:#fff;color:var(--navy-primary)}
 .promo-img{height:100%;min-height:320px;background:#1a2a4a}
 .promo-img img{width:100%;height:100%}
-/* Trust section: avoids unverifiable customer or sales statistics. */
 .stats-bar{background:var(--bg-white);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);padding:30px 24px;margin-top:70px}
 .stats-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
 .stat-item h3{font-family:var(--font-serif);font-size:30px;font-weight:600}
@@ -173,7 +180,7 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 .summary-item small{grid-column:1;color:#b6a08a}
 .item-controls{display:flex;align-items:center;gap:6px;grid-column:1}
 .qty-btn{background:rgba(255,255,255,.1);border:none;color:#f5ede4;width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:15px}
-.qty-btn:hover{background:var(--accent-gold);color:#0A1128}
+.qty-btn:hover:not(:disabled){background:var(--accent-gold);color:#0A1128}
 .qty-num{min-width:20px;text-align:center;font-weight:600}
 .remove-btn{background:none;border:none;color:#b6a08a;cursor:pointer;font-size:16px;width:28px;height:28px}
 .remove-btn:hover{color:#ff8a80}
@@ -191,9 +198,6 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 #orderSent p{color:#d4c4b0;font-size:14px;max-width:420px;margin:0 auto 18px}
 .checkout-modal.sent #orderSent{display:block}
 .checkout-modal.sent .checkout-main{display:none}
-.checkout-trigger-btn{position:fixed;bottom:96px;right:24px;background:linear-gradient(135deg,var(--checkout-brown),#2a1d12);color:#f5ede4;border:1px solid rgba(255,255,255,.1);padding:14px 24px;border-radius:50px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 30px rgba(62,44,27,.4);z-index:99;display:flex;align-items:center;gap:10px;transition:transform .3s}
-.checkout-trigger-btn:hover{transform:translateY(-3px)}
-.checkout-trigger-btn i{font-size:20px}
 .sticky-wa{position:fixed;bottom:24px;right:24px;background:#1FA855;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 25px rgba(31,168,85,.4);z-index:99;transition:transform .3s var(--ease)}
 .sticky-wa:hover{transform:scale(1.1)}
 .toast{position:fixed;top:90px;left:50%;transform:translate(-50%,-12px);background:#0A1128;color:#fff;padding:14px 26px;border-radius:8px;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.25);opacity:0;transition:opacity .3s,transform .3s;z-index:1100;pointer-events:none;border-left:4px solid var(--accent-gold);max-width:90vw}
@@ -221,14 +225,13 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   .hero-content{padding:40px 20px}
   .checkout-form .row{grid-template-columns:1fr}
   .sticky-wa{width:50px;height:50px;font-size:26px;bottom:16px;right:16px}
-  .checkout-trigger-btn{bottom:76px;right:16px;padding:12px 16px}
-  .checkout-trigger-btn span{display:none}
   .promo-content{padding:30px 24px}
   .promo-title{font-size:28px}
   .section{padding:40px 16px}
+  .filter-bar .view-all{margin-left:0;width:100%}
 }
 
-/* ===== Premium refinements: calmer motion, more space, quieter accents ===== */
+/* ===== Premium refinements ===== */
 .top-bar{background:var(--navy-primary);letter-spacing:1.6px;font-weight:400}
 .nav-links a{letter-spacing:2px;font-weight:500}
 .nav-container{padding:22px 24px}
@@ -247,40 +250,64 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 .category-card:hover .category-content{transform:none;box-shadow:none}
 .category-card img{transition:transform 1.2s var(--ease)}
 .category-card:hover img{transform:scale(1.04)}
+
+/* ===== PREMIUM CARD REDESIGN ===== */
 .products-grid{gap:40px 24px}
 .product-card{background:transparent;box-shadow:none;border-radius:0;overflow:visible}
 .product-card:hover{transform:none;box-shadow:none}
-.product-image{height:auto;aspect-ratio:4/5;cursor:pointer}
+.product-image{height:auto;aspect-ratio:4/5;cursor:pointer;position:relative}
 .product-image img{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .7s ease,transform 1.2s var(--ease)}
 .product-image img.loaded{opacity:1}
 .product-image .img2{opacity:0!important}
 .product-card:hover .product-image .img2.loaded{opacity:1!important}
 .product-card:hover .product-image img{transform:scale(1.03)}
-.product-badge{background:var(--text-dark);color:var(--bg-light);border-radius:0;letter-spacing:1.5px;font-weight:500;top:0;left:0;padding:6px 12px}
-.wishlist-btn{background:transparent;color:#0A1128;box-shadow:none;top:6px;right:6px}
+.product-image:not(:has(img.loaded))::after{
+  content:''; position:absolute; inset:0;
+  background:
+    linear-gradient(135deg,transparent 49%,var(--border-color) 49% 51%,transparent 51%),
+    linear-gradient(45deg,transparent 49%,var(--border-color) 49% 51%,transparent 51%);
+  opacity:.35; pointer-events:none;
+}
+.product-badge{background:var(--text-dark);color:var(--bg-light);border-radius:0;letter-spacing:1.5px;font-weight:500;top:0;left:0;padding:6px 12px;z-index:1}
+.product-flag{position:absolute;top:0;right:0;background:var(--text-muted);color:var(--bg-white);padding:6px 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;z-index:1;font-weight:500}
+.product-card.soldout .product-image img{opacity:.5;filter:grayscale(.3)}
+.wishlist-btn{background:transparent;color:#0A1128;box-shadow:none;top:6px;right:6px;z-index:2}
 .wishlist-btn:hover{transform:none;opacity:.7}
 .wishlist-btn[aria-pressed="true"]{background:transparent;color:#B3261E}
-.quick-btn{position:absolute;left:0;right:0;bottom:0;background:var(--glass);color:var(--text-dark);border:none;padding:13px 0;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
-.product-card:hover .quick-btn,.quick-btn:focus-visible{opacity:1;transform:none}
-@media (hover:none){.quick-btn{opacity:1;transform:none}}
 .product-info{padding:16px 0 0}
-.product-info h3{font-weight:400;font-size:15px;cursor:pointer}
-.product-price{font-weight:500;font-size:15px}
-.product-price .original{font-size:13px}
-.size-select,.sort-select{background:transparent;color:var(--text-dark);border:1px solid var(--border-color);border-radius:0;padding:9px 10px;font-size:12px;font-family:inherit}
-.sort-select{width:auto;margin:0}
-.add-to-cart-btn{background:transparent;color:var(--text-dark);border:1px solid var(--text-dark);border-radius:0;letter-spacing:1.6px;font-weight:500;padding:11px 0}
-.add-to-cart-btn:hover{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg);transform:none;box-shadow:none}
-.promo-title{font-weight:300;font-size:48px}
-.stats-bar{box-shadow:none}
-.stat-item h3{font-weight:400}
-.feature-box:hover{transform:none}
-.sticky-wa{width:52px;height:52px;font-size:26px;box-shadow:0 4px 16px rgba(0,0,0,.18);bottom:20px;right:20px}
-.checkout-modal,.checkout-summary,.btn-checkout-wa{border-radius:0}
-.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s var(--ease)}
-.js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
-/* cart drawer */
+.product-info h3{font-weight:400;font-size:15px;cursor:pointer;display:inline-block;transition:color .3s}
+.product-info h3:hover{text-decoration:underline;text-underline-offset:4px}
+.product-price{font-weight:400;font-size:15px;letter-spacing:.02em}
+.product-price .original{font-size:12px;opacity:.7}
+.stock-note{display:block;font-size:11px;color:#B3261E;letter-spacing:.6px;margin-top:6px;text-transform:uppercase;font-weight:500}
+.swatches{display:flex;gap:6px;margin-top:10px}
+.swatch{width:12px;height:12px;border-radius:50%;border:1px solid var(--border-color);display:inline-block}
+
+/* ===== Recently viewed ===== */
+.recent-section{margin-top:50px;padding-top:30px;border-top:1px solid var(--border-color)}
+.recent-row{display:flex;gap:12px;overflow-x:auto;padding:12px 0;scrollbar-width:thin}
+.recent-card{background:none;border:1px solid var(--border-color);padding:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);min-width:100px;flex-shrink:0;transition:border-color .3s}
+.recent-card:hover{border-color:var(--text-dark)}
+.recent-card img{width:80px;height:100px;object-fit:cover}
+.recent-card span{font-size:11px;text-align:center;line-height:1.3;color:var(--text-dark)}
+
+/* ===== Wishlist drawer ===== */
+.wishlist-drawer{background:var(--bg-white);color:var(--text-dark);width:min(380px,100%);height:100%;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s var(--ease);box-shadow:-20px 0 60px rgba(0,0,0,.2)}
+.wishlist-overlay{align-items:stretch;justify-content:flex-end;background:rgba(0,0,0,.45)}
+.wishlist-overlay.active .wishlist-drawer{transform:none}
+.wishlist-body{flex:1;overflow-y:auto;padding:8px 24px}
+.wish-item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--border-color);align-items:start}
+.wish-item .thumb{width:64px;height:80px;background:var(--img-bg);overflow:hidden}
+.wish-item .thumb img{width:100%;height:100%;object-fit:cover}
+.wish-item .name{font-weight:500;font-size:13px;margin-bottom:4px}
+.wish-item .price{font-size:12px;color:var(--text-muted);margin-bottom:8px}
+.wish-item .actions{display:flex;flex-direction:column;gap:6px}
+.wish-item .actions button{background:none;border:1px solid var(--text-dark);color:var(--text-dark);padding:6px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:500}
+.wish-item .actions button:hover{background:var(--btn-bg);color:var(--btn-fg)}
+.wish-item .actions .rm{border-color:var(--border-color);color:var(--text-muted)}
+.wish-item .actions .rm:hover{background:#B3261E;color:#fff;border-color:#B3261E}
+
+/* ===== Cart drawer ===== */
 .checkout-overlay.drawer-overlay{align-items:stretch;justify-content:flex-end;background:rgba(0,0,0,.45)}
 .drawer{background:var(--bg-white);color:var(--text-dark);width:min(440px,100%);height:100%;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s var(--ease);box-shadow:-20px 0 60px rgba(0,0,0,.2)}
 .drawer-overlay.active .drawer{transform:none}
@@ -294,7 +321,7 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 .drawer .summary-item.with-thumb{grid-template-columns:64px 1fr auto;align-items:start;gap:14px}
 .drawer small,.drawer .empty-cart-msg,.drawer .remove-btn{color:var(--text-muted)}
 .drawer .qty-btn{background:transparent;color:var(--text-dark);border:1px solid var(--border-color);border-radius:0}
-.drawer .qty-btn:hover{background:var(--btn-bg);color:var(--btn-fg)}
+.drawer .qty-btn:hover:not(:disabled){background:var(--btn-bg);color:var(--btn-fg)}
 .thumb{width:64px;height:80px;background:var(--img-bg)}
 .thumb img{width:100%;height:100%}
 .si-name{font-weight:500}
@@ -310,14 +337,17 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 .drawer-foot{padding:18px 24px 24px;border-top:1px solid var(--border-color)}
 .drawer-foot .row{display:flex;justify-content:space-between;font-weight:600;margin-bottom:4px}
 .drawer-foot .note{font-size:12px;color:var(--text-muted);margin-bottom:14px}
-/* quick view */
+
+/* ===== Quick view ===== */
 .qv{background:var(--bg-white);color:var(--text-dark);width:min(880px,94%);max-height:92vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative;transform:translateY(16px);transition:transform .4s var(--ease)}
 .checkout-overlay.active .qv{transform:none}
-.qv .close-btn{color:var(--text-muted);z-index:2}
-.qv-img{background:var(--img-bg);aspect-ratio:4/5;position:relative}
-.qv-img img{position:absolute;inset:0;width:100%;height:100%}
-.qv-img img+img{opacity:0;transition:opacity .5s}
-.qv-img:hover img+img{opacity:1}
+.qv .close-btn{color:var(--text-muted);z-index:5}
+.qv-img{background:var(--img-bg);aspect-ratio:4/5;position:relative;overflow:hidden}
+.qv-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}
+.qv-thumbs{position:absolute;bottom:12px;left:12px;display:flex;gap:6px;z-index:2}
+.qv-thumb{width:44px;height:56px;padding:0;border:1px solid transparent;background:none;cursor:pointer;overflow:hidden}
+.qv-thumb.active{border-color:var(--text-dark)}
+.qv-thumb img{position:static;width:100%;height:100%;object-fit:cover}
 .qv-info{padding:44px 36px}
 .qv-info h2{font-family:var(--font-serif);font-weight:400;font-size:32px;line-height:1.15;margin:4px 0 8px}
 .qv-price{font-size:18px;margin-bottom:14px}
@@ -330,12 +360,29 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 .size-guide table{width:100%;border-collapse:collapse;margin-top:8px}
 .size-guide th,.size-guide td{border-bottom:1px solid var(--border-color);padding:6px 4px;text-align:left}
 .qv-add{width:100%;justify-content:center}
-.qv-wish{background:none;border:none;color:var(--text-muted);margin-top:12px;cursor:pointer;font-size:13px;text-decoration:underline}
+.qv-add:disabled{opacity:.5}
+.qv-wish,.qv-share{background:none;border:none;color:var(--text-muted);margin-top:12px;cursor:pointer;font-size:13px;text-decoration:underline;margin-right:16px}
 .qv-points{list-style:none;margin-top:20px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border-color);padding-top:14px}
 .qv-points li{padding:3px 0}
+.qv-swatch{display:inline-block;width:18px;height:18px;border-radius:50%;border:1px solid var(--border-color);margin-right:6px;vertical-align:middle;cursor:pointer;transition:border-color .2s}
+.qv-swatch.active{border-color:var(--text-dark);border-width:2px}
+
+/* ===== Skeletons ===== */
+.skeleton{background:linear-gradient(90deg,var(--img-bg) 25%,var(--border-color) 50%,var(--img-bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+.skeleton-card .product-image{background:linear-gradient(90deg,var(--img-bg) 25%,var(--border-color) 50%,var(--img-bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-line{height:12px;background:var(--img-bg);margin-top:10px}
+
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+
 @media (max-width:992px){.hero-title{font-size:48px}.section{padding:80px 24px}}
 @media (max-width:700px){.qv{grid-template-columns:1fr}.qv-info{padding:28px 20px}}
 @media (max-width:600px){.hero-title{font-size:38px}.section{padding:56px 16px}.products-grid{gap:28px 14px}}
+@media (max-width:700px){
+  .qv-add,.qv-wish,.qv-share{position:sticky;bottom:0;z-index:2;background:var(--bg-white);padding:10px 0}
+}
 </style>
 </head>
 <body>
@@ -353,6 +400,7 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
     <div class="nav-icons">
       <label class="currency-control" for="navCurrency">Currency <select id="navCurrency" aria-label="Display currency"></select></label>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><i class="ri-moon-line" id="themeIcon" aria-hidden="true"></i></button>
+      <button class="icon-btn" id="wishIcon" type="button" aria-label="Open wishlist"><i class="ri-heart-line" aria-hidden="true"></i><span class="cart-count" id="wishCount" hidden>0</span></button>
       <button class="icon-btn" id="cartIcon" type="button" aria-label="Open cart and checkout"><i class="ri-shopping-bag-line" aria-hidden="true"></i><span class="cart-count" id="cartCount" hidden>0</span></button>
       <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i class="ri-menu-line" aria-hidden="true"></i></button>
     </div>
@@ -389,7 +437,29 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 
 <section class="section" id="productSection">
   <div class="section-header"><div><div class="section-subtitle">New arrivals</div><h2 class="section-title" id="productTitle">Fresh Styles, Just In</h2></div><label class="sr-only" for="sortSel">Sort products</label><select id="sortSel" class="sort-select"><option value="feat">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div>
-  <div class="products-grid" id="productGrid"></div><p class="price-note">Prices are displayed in your selected currency using indicative conversion rates. Confirm final pricing and availability with KimTech before ordering.</p>
+
+  <div class="filter-bar" role="search">
+    <input type="search" id="searchInput" placeholder="Search products…" aria-label="Search products">
+    <select id="priceFilter" aria-label="Filter by price">
+      <option value="all">All prices</option>
+      <option value="under100">Under $100</option>
+      <option value="100to200">$100 – $200</option>
+      <option value="over200">Over $200</option>
+    </select>
+    <select id="sizeFilter" aria-label="Filter by size">
+      <option value="all">All sizes</option>
+      <option>S</option><option>M</option><option>L</option><option>XL</option>
+    </select>
+    <button id="clearFilters" class="view-all" type="button">Clear</button>
+  </div>
+
+  <div class="products-grid" id="productGrid"></div>
+  <p class="price-note">Prices are displayed in your selected currency using indicative conversion rates. Confirm final pricing and availability with KimTech before ordering.</p>
+
+  <div class="recent-section" id="recentSection" hidden>
+    <div class="section-subtitle">Recently viewed</div>
+    <div class="recent-row" id="recentStrip"></div>
+  </div>
 </section>
 
 <div class="promo-banner">
@@ -412,13 +482,11 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   <div class="footer-grid">
     <div class="footer-brand"><h2>KimTech</h2><p>Timeless fashion for the modern lifestyle. Thoughtful design, crafted for you.</p></div>
     <div class="footer-col"><h3>Shop</h3><ul><li><button type="button" data-section="men">Men</button></li><li><button type="button" data-section="women">Women</button></li><li><button type="button" data-section="accessories">Accessories</button></li><li><button type="button" data-section="sale">Sale</button></li></ul></div>
-    <!-- Replace these informational anchor links with dedicated policy pages when those policies are finalized. -->
     <div class="footer-col"><h3>Help</h3><ul><li><a href="#contact">Shipping details on request</a></li><li><a href="#contact">Returns information</a></li><li><a href="#contact">Frequently asked questions</a></li><li><a href="#productSection">Product size guides</a></li></ul></div>
     <div class="footer-col"><h3>About</h3><ul><li><a href="#top">Our collection</a></li><li><a href="#contact">Contact KimTech</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p>&copy; <span id="year">2026</span> KimTech. All rights reserved.</p><div><a href="#contact" style="margin-right:15px">Privacy information</a><a href="#contact">Order terms</a></div></div>
 </footer>
-
 
 <div class="checkout-overlay" id="checkoutOverlay">
   <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
@@ -450,6 +518,29 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
             </div>
             <label for="notes">Delivery notes (optional)</label>
             <textarea id="notes" name="notes" rows="2" placeholder="Landmark, preferred delivery time..."></textarea>
+
+            <h3>Preferences</h3>
+            <div class="row">
+              <div><label for="fit">Fit preference</label>
+                <select id="fit" name="fit">
+                  <option>Regular fit</option><option>Slim fit</option><option>Relaxed fit</option>
+                </select>
+              </div>
+              <div><label for="giftwrap">Gift wrap (+$5)</label>
+                <select id="giftwrap" name="giftwrap">
+                  <option value="no">No gift wrap</option>
+                  <option value="yes">Add gift wrap (+$5)</option>
+                </select>
+              </div>
+            </div>
+
+            <h3>Promo code</h3>
+            <div class="row" style="grid-template-columns:2fr 1fr">
+              <input type="text" id="promo" placeholder="e.g. WELCOME10" autocomplete="off">
+              <button type="button" id="applyPromo" class="btn-ghost" style="margin-top:0;height:42px">Apply</button>
+            </div>
+            <p id="promoMsg" class="ship-note" style="margin:-4px 0 10px" aria-live="polite"></p>
+
             <h3>Payment</h3>
             <label for="payment">Preferred payment method</label>
             <select id="payment" name="payment"></select>
@@ -461,10 +552,14 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
         <div class="checkout-summary" aria-live="polite">
           <h3>Order summary</h3>
           <div id="summaryItems"></div>
-          <div class="summary-sub"><span>Subtotal</span><span id="sumSub">KSh 0</span></div>
-          <div class="summary-sub"><span>Shipping</span><span id="sumShip">KSh 0</span></div>
-          <div class="summary-total"><span>Total</span><span id="sumTotal">KSh 0</span></div>
-          <p class="ship-note" id="shipNote"></p><p class="price-note">Displayed conversion is an estimate, not a guaranteed settlement rate.</p>
+          <div class="summary-sub"><span>Subtotal</span><span id="sumSub">KSh 0</span></div>
+          <div class="summary-sub" id="discountRow" hidden><span>Discount</span><span id="sumDiscount">—</span></div>
+          <div class="summary-sub" id="giftRow" hidden><span>Gift wrap</span><span id="sumGift">—</span></div>
+          <div class="summary-sub"><span>Shipping</span><span id="sumShip">KSh 0</span></div>
+          <div class="summary-total"><span>Total</span><span id="sumTotal">KSh 0</span></div>
+          <p class="ship-note" id="shipNote"></p>
+          <p class="ship-note" id="etaNote"></p>
+          <p class="price-note">Displayed conversion is an estimate, not a guaranteed settlement rate.</p>
         </div>
       </div>
     </div>
@@ -485,9 +580,17 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
     <div class="drawer-ship"><p id="drawerShipMsg"></p><div class="bar"><span id="drawerBar"></span></div></div>
     <div class="drawer-body" id="drawerItems"></div>
     <div class="drawer-upsell" id="drawerUpsell"></div>
-    <div class="drawer-foot"><div class="row"><span>Subtotal</span><span id="drawerSub">KSh 0</span></div><p class="note">Shipping and total are confirmed at checkout.</p><button class="btn-primary" id="drawerCheckout" type="button" style="width:100%;justify-content:center">Checkout</button></div>
+    <div class="drawer-foot"><div class="row"><span>Subtotal</span><span id="drawerSub">KSh 0</span></div><p class="note">Shipping and total are confirmed at checkout.</p><button class="btn-primary" id="drawerCheckout" type="button" style="width:100%;justify-content:center">Checkout</button></div>
   </aside>
 </div>
+
+<div class="checkout-overlay wishlist-overlay" id="wishOverlay">
+  <aside class="wishlist-drawer" id="wishDrawer" role="dialog" aria-modal="true" aria-labelledby="wishTitle" tabindex="-1">
+    <div class="drawer-head"><h2 id="wishTitle">Wishlist</h2><button class="icon-btn" id="closeWish" type="button" aria-label="Close wishlist"><i class="ri-close-line" aria-hidden="true"></i></button></div>
+    <div class="wishlist-body" id="wishBody"></div>
+  </aside>
+</div>
+
 <div class="checkout-overlay" id="qvOverlay">
   <div class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvName" tabindex="-1">
     <button class="close-btn" id="closeQV" type="button" aria-label="Close quick view">&times;</button>
@@ -499,12 +602,11 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
 
 <script>
 (function(){
-  /* ===== Store settings: review these before publishing ===== */
+  /* ===== Store settings ===== */
   const WA_NUMBER = '2547XXXXXXXX'; // REQUIRED: replace with your WhatsApp number, digits only, including country code.
-  const FREE_SHIP_MIN = 15000; // Base USD cents. Change to your actual threshold or set to Infinity to disable.
-  // Shipping is stored as USD cents for easy multi-currency display. These are DEMO estimates; replace with actual rates.
+  const FREE_SHIP_MIN = 15000; // USD cents
+  const GIFT_WRAP_USD_CENTS = 500;
   const SHIPPING_USD_CENTS = { US:1000, CA:1500, GB:1800, DE:1800, FR:1800, IT:1800, ES:1800, AU:2200, NZ:2200, JP:2000, SG:1800, AE:2000, IN:1400, ZA:2200, NG:2500, KE:2500, OTHER:3000 };
-  // Static indicative FX rates: units of currency per 1 USD. Update before launch; no live FX API is connected.
   const FX = { USD:1, KES:130, EUR:0.92, GBP:0.79, CAD:1.36, AUD:1.52, NZD:1.65, JPY:149, SGD:1.34, AED:3.67, INR:83, ZAR:18.5, NGN:1550 };
   const COUNTRY_CONFIG = {
     KE:{name:'Kenya',currency:'KES'}, US:{name:'United States',currency:'USD'}, CA:{name:'Canada',currency:'CAD'},
@@ -515,41 +617,56 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
     NG:{name:'Nigeria',currency:'NGN'}, OTHER:{name:'Other destination',currency:'USD'}
   };
   const CURRENCY_LOCALES = { KES:'en-KE', USD:'en-US', EUR:'de-DE', GBP:'en-GB', CAD:'en-CA', AUD:'en-AU', NZD:'en-NZ', JPY:'ja-JP', SGD:'en-SG', AED:'en-AE', INR:'en-IN', ZAR:'en-ZA', NGN:'en-NG' };
+  const ETA = { KE:'1–3 business days', US:'5–8 business days', CA:'5–8 business days',
+    GB:'3–6 business days', DE:'3–6 business days', FR:'3–6 business days', IT:'3–6 business days',
+    ES:'3–6 business days', AU:'6–10 business days', NZ:'6–10 business days', JP:'5–9 business days',
+    SG:'4–7 business days', AE:'4–7 business days', IN:'5–9 business days', ZA:'5–9 business days',
+    NG:'5–9 business days', OTHER:'7–12 business days' };
   const CLOTHING_SIZES = ['S','M','L','XL'];
+  const PROMOS = {
+    WELCOME10:{pct:10,label:'10% off your order'},
+    VIP20:{pct:20,label:'20% VIP discount'},
+    FREESHIP:{ship:0,label:'Free shipping'}
+  };
 
-  /* prices in cents. Accessories images are guesses: check or replace them. */
   const U = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=600&q=70`;
+  const PH = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750"><rect fill="#F0EFEC" width="600" height="750"/><path d="M300 340a30 30 0 1 0 0-60 30 30 0 0 0 0 60zm-20 20h40l30 80-30 20v130h-40V460l-30-20z" fill="#B9B4A9"/></svg>'
+  );
+
   const products = [
-    {id:1,name:'Oversized Blazer',price:12900,was:null,img:U('photo-1591047139829-d91aecb6caea'),cat:'men'},
-    {id:2,name:'Linen Shirt',price:7900,was:null,img:U('photo-1621072156002-e2fccdc0b176'),cat:'men'},
-    {id:3,name:'Tailored Trousers',price:8900,was:null,img:U('photo-1506629082925-2368c4b7b03a'),cat:'men'},
-    {id:4,name:'Relaxed Tee',price:4900,was:null,img:U('photo-1521572267360-ee0c2909d518'),cat:'women'},
-    {id:5,name:'Leather Jacket',price:15900,was:19900,img:U('photo-1551028719-00167b16eac5'),cat:'men'},
-    {id:6,name:'Cashmere Sweater',price:18900,was:null,img:U('photo-1556905055-8f358a7a47b2'),cat:'women'},
-    {id:7,name:'Wool Coat',price:24900,was:29900,img:U('photo-1539533018447-63fcce2678e3'),cat:'women'},
-    {id:8,name:'Slim Chinos',price:6900,was:null,img:U('photo-1473966968600-fa801b869a1a'),cat:'men'},
-    {id:9,name:'Polo Shirt',price:5900,was:null,img:U('photo-1586363104862-3a5e2ab60d99'),cat:'men'},
-    {id:10,name:'Denim Jacket',price:13900,was:16900,img:U('photo-1576871337632-b9aef4c17ab9'),cat:'women'},
-    {id:11,name:'Knit Cardigan',price:9900,was:null,img:U('photo-1544022613-e87ca75a784a'),cat:'women'},
-    {id:12,name:'Cargo Pants',price:7900,was:null,img:U('photo-1517433670267-08bbd4be890f'),cat:'men'},
-    {id:13,name:'Leather Belt',price:3900,was:null,img:U('photo-1553062407-98eeb64c6a62'),cat:'accessories'},
-    {id:14,name:'Silk Scarf',price:4500,was:null,img:U('photo-1584917865442-de89df76afd3'),cat:'accessories'},
-    {id:15,name:'Canvas Tote',price:3500,was:4500,img:U('photo-1590874103328-eac38a683ce7'),cat:'accessories'},
-    {id:16,name:'Wool Beanie',price:2500,was:null,img:U('photo-1576871337622-98d48d1cf531'),cat:'accessories'},
-    {id:17,name:'Straight-Leg Jeans',price:8900,was:null,img:'images/jeans.jpg',cat:'men'},
-    {id:18,name:'Merino Crew Sweater',price:11900,was:null,img:'images/merino-sweater.jpg',cat:'men'},
-    {id:19,name:'Satin Slip Dress',price:9900,was:12900,img:'images/slip-dress.jpg',cat:'women'},
-    {id:20,name:'Pleated Midi Skirt',price:7900,was:null,img:'images/midi-skirt.jpg',cat:'women'},
-    {id:21,name:'Wide-Leg Trousers',price:8500,was:null,img:'images/wide-trousers.jpg',cat:'women'},
-    {id:22,name:'Leather Wallet',price:4900,was:null,img:'images/wallet.jpg',cat:'accessories'},
-    {id:23,name:'Wool Scarf',price:3900,was:null,img:'images/wool-scarf.jpg',cat:'accessories'},
-    {id:24,name:'Baseball Cap',price:2900,was:3500,img:'images/cap.jpg',cat:'accessories'}
+    {id:1,name:'Oversized Blazer',price:12900,was:null,img:U('photo-1591047139829-d91aecb6caea'),img2:U('photo-1591047139829-d91aecb6caea-2'),cat:'men',flag:'new',stock:8,colors:['#1a1a1a','#8B7355','#4A5568']},
+    {id:2,name:'Linen Shirt',price:7900,was:null,img:U('photo-1621072156002-e2fccdc0b176'),cat:'men',stock:12,colors:['#FAF8F3','#A8C0D0','#7B8B9E']},
+    {id:3,name:'Tailored Trousers',price:8900,was:null,img:U('photo-1506629082925-2368c4b7b03a'),cat:'men',stock:5,colors:['#1a1a1a','#3D4A5C']},
+    {id:4,name:'Relaxed Tee',price:4900,was:null,img:U('photo-1521572267360-ee0c2909d518'),cat:'women',flag:'new',stock:20,colors:['#FFFFFF','#1a1a1a','#B8860B']},
+    {id:5,name:'Leather Jacket',price:15900,was:19900,img:U('photo-1551028719-00167b16eac5'),img2:U('photo-1551028719-00167b16eac5-2'),cat:'men',flag:'limited',stock:2,colors:['#1a1a1a','#5C4033']},
+    {id:6,name:'Cashmere Sweater',price:18900,was:null,img:U('photo-1556905055-8f358a7a47b2'),cat:'women',stock:6,colors:['#F5E6D3','#B86B77','#7A8B99']},
+    {id:7,name:'Wool Coat',price:24900,was:29900,img:U('photo-1539533018447-63fcce2678e3'),img2:U('photo-1539533018447-63fcce2678e3-2'),cat:'women',flag:'bestseller',stock:3,colors:['#C4A882','#1a1a1a','#6B4C3B']},
+    {id:8,name:'Slim Chinos',price:6900,was:null,img:U('photo-1473966968600-fa801b869a1a'),cat:'men',stock:14,colors:['#D4C4A8','#3D4A5C','#1a1a1a']},
+    {id:9,name:'Polo Shirt',price:5900,was:null,img:U('photo-1586363104862-3a5e2ab60d99'),cat:'men',stock:18,colors:['#1a1a1a','#FFFFFF','#2D5016']},
+    {id:10,name:'Denim Jacket',price:13900,was:16900,img:U('photo-1576871337632-b9aef4c17ab9'),img2:U('photo-1576871337632-b9aef4c17ab9-2'),cat:'women',stock:7,colors:['#4A6FA5','#1a1a1a']},
+    {id:11,name:'Knit Cardigan',price:9900,was:null,img:U('photo-1544022613-e87ca75a784a'),cat:'women',stock:9,colors:['#D4B896','#8B6B7A','#1a1a1a']},
+    {id:12,name:'Cargo Pants',price:7900,was:null,img:U('photo-1517433670267-08bbd4be890f'),cat:'men',stock:11,colors:['#4A5240','#1a1a1a','#7B6B5A']},
+    {id:13,name:'Leather Belt',price:3900,was:null,img:U('photo-1553062407-98eeb64c6a62'),cat:'accessories',stock:25,colors:['#1a1a1a','#5C4033']},
+    {id:14,name:'Silk Scarf',price:4500,was:null,img:U('photo-1584917865442-de89df76afd3'),cat:'accessories',flag:'new',stock:15,colors:['#B86B77','#C4A882','#7A8B99']},
+    {id:15,name:'Canvas Tote',price:3500,was:4500,img:U('photo-1590874103328-eac38a683ce7'),cat:'accessories',stock:20,colors:['#F0EBE0','#1a1a1a']},
+    {id:16,name:'Wool Beanie',price:2500,was:null,img:U('photo-1576871337622-98d48d1cf531'),cat:'accessories',stock:30,colors:['#1a1a1a','#B3261E','#4A5240']},
+    {id:17,name:'Straight-Leg Jeans',price:8900,was:null,img:U('photo-1541099649105-f69ad21f3246'),cat:'men',stock:8,colors:['#1a1a1a','#4A6FA5']},
+    {id:18,name:'Merino Crew Sweater',price:11900,was:null,img:U('photo-1434389677669-e08b4cac3105'),cat:'men',stock:6,colors:['#1a1a1a','#8B7355','#6B7B8C']},
+    {id:19,name:'Satin Slip Dress',price:9900,was:12900,img:U('photo-1595777457583-95e059d581b8'),cat:'women',stock:4,colors:['#C4957A','#1a1a1a','#B86B77']},
+    {id:20,name:'Pleated Midi Skirt',price:7900,was:null,img:U('photo-1583496661160-fb5886a13d77'),cat:'women',stock:10,colors:['#D4B896','#1a1a1a','#7A8B99']},
+    {id:21,name:'Wide-Leg Trousers',price:8500,was:null,img:U('photo-1594633312681-425c7b97ccd1'),cat:'women',flag:'new',stock:7,colors:['#F0EBE0','#1a1a1a','#3D4A5C']},
+    {id:22,name:'Leather Wallet',price:4900,was:null,img:U('photo-1627123424574-724758594e93'),cat:'accessories',stock:12,colors:['#1a1a1a','#5C4033']},
+    {id:23,name:'Wool Scarf',price:3900,was:null,img:U('photo-1520903920243-00d872a2d1c9'),cat:'accessories',stock:14,colors:['#B3261E','#1a1a1a','#C4A882']},
+    {id:24,name:'Baseball Cap',price:2900,was:3500,img:U('photo-1588850561407-ed78c282e89b'),cat:'accessories',stock:22,colors:['#1a1a1a','#FFFFFF','#2D5016']}
   ];
 
   const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const currencySel = $('#currency');
   const navCurrency = $('#navCurrency');
   let selectedCurrency = 'KES';
+  let appliedPromo = null;
+
   const money = cents => {
     const code = selectedCurrency, amount = (Number(cents)||0) / 100 * (FX[code] || 1);
     const whole = ['KES','JPY','NGN'].includes(code);
@@ -561,14 +678,21 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   const load = (k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(_){return d}};
   const save = (k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}};
 
+  // ---- DECLARE EVERYTHING FIRST ----
+  const TITLES={sale:'Sale: Best Deals',men:"Men's Collection",women:"Women's Collection",accessories:'Accessories'};
+  let sortMode='feat';
+  let filter = null, toastTimer;
+  let currencyManuallySelected = false;
+  let search='', priceBand='all', sizeBand='all';
+
   const savedCart = load('kt_cart', []);
   let cart = (Array.isArray(savedCart) ? savedCart : []).filter(i=>i && products.some(p=>p.id===Number(i.id)) && Number.isInteger(Number(i.qty)) && Number(i.qty)>0 && Number(i.qty)<=99 && sizesFor(products.find(p=>p.id===Number(i.id))).includes(i.size)).map(i=>({id:Number(i.id),size:i.size,qty:Number(i.qty)}));
   const savedWish = load('kt_wish', []);
   let wishlist = new Set((Array.isArray(savedWish)?savedWish:[]).map(Number).filter(id=>products.some(p=>p.id===id)));
-  let currencyManuallySelected = false;
-  let filter = null, toastTimer;
+  const RECENT_KEY = 'kt_recent';
+  let recent = load(RECENT_KEY, []).filter(id=>products.some(p=>p.id===id)).slice(0,6);
+
   $('#year').textContent = new Date().getFullYear();
-  /* Animated wordmark: KIM (bold) + TECH (light), letters rise in one by one */
   $('#logoHome').innerHTML=[...'KimTech'].map((c,i)=>`<span class="${i<3?'b':''}" style="--i:${i}" aria-hidden="true">${c}</span>`).join('');
   const whatsappConfigured = () => /^\d{8,15}$/.test(WA_NUMBER) && !WA_NUMBER.includes('X');
   if (whatsappConfigured()) $('#floatWa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello KimTech, I have a question.')}`;
@@ -594,11 +718,157 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   countrySel.value='KE';
   const currencyOptions = Object.keys(FX).map(code=>`<option value="${code}">${code}</option>`).join('');
   currencySel.innerHTML=currencyOptions; navCurrency.innerHTML=currencyOptions;
+
+  const lines = () => cart.map(i=>({...i,p:products.find(p=>p.id===i.id)})).filter(l=>l.p);
+  const subtotal = () => lines().reduce((s,l)=>s+l.p.price*l.qty,0);
+
+  function giftWrapSelected(){return $('#giftwrap') && $('#giftwrap').value==='yes'}
+  function discountUSD(sub){
+    if(!appliedPromo) return 0;
+    if(appliedPromo.pct) return Math.round(sub * appliedPromo.pct / 100);
+    return 0;
+  }
+  function shippingCost(sub){
+    if(sub===0) return 0;
+    if(appliedPromo && appliedPromo.ship!==undefined) return 0;
+    if(sub>=FREE_SHIP_MIN) return 0;
+    return SHIPPING_USD_CENTS[countrySel.value] ?? SHIPPING_USD_CENTS.OTHER;
+  }
+  function updatePaymentOptions(){
+    const options = countrySel.value==='KE'
+      ? ['M-Pesa (details confirmed on WhatsApp)','Bank transfer (details confirmed on WhatsApp)','Cash on delivery (if available)']
+      : ['Bank transfer (details confirmed on WhatsApp)','Card / online payment (if arranged separately)','Other method agreed on WhatsApp'];
+    $('#payment').innerHTML=options.map(x=>`<option>${x}</option>`).join('');
+  }
+
+  const rowHTML=(l,i,thumb)=>`<div class="summary-item${thumb?' with-thumb':''}">${thumb?`<div class="thumb"><img src="${l.p.img}" alt="" width="64" height="80" onerror="this.src='${PH}'"></div>`:''}<div class="si-main"><span class="si-name">${esc(l.p.name)}</span> <small>(${esc(l.size)})</small>
+    <div class="item-controls"><button class="qty-btn" type="button" data-act="dec" data-i="${i}" aria-label="Decrease quantity of ${esc(l.p.name)}" ${l.qty<=1?'disabled':''}>&minus;</button><span class="qty-num">${l.qty}</span><button class="qty-btn" type="button" data-act="inc" data-i="${i}" aria-label="Increase quantity of ${esc(l.p.name)}">+</button><button class="remove-btn" type="button" data-act="rm" data-i="${i}" aria-label="Remove ${esc(l.p.name)}"><i class="ri-close-line" aria-hidden="true"></i></button></div></div><span class="line-total">${money(l.p.price*l.qty)}</span></div>`;
+
+  function updateCart(){
+    save('kt_cart',cart);
+    const n=cart.reduce((s,i)=>s+i.qty,0), badge=$('#cartCount');
+    badge.textContent=n; badge.hidden=n===0;
+    const sub=subtotal(), disc=discountUSD(sub), gift=giftWrapSelected()?GIFT_WRAP_USD_CENTS:0;
+    const ship=shippingCost(sub), L=lines();
+    const empty='<div class="empty-cart-msg">Your cart is empty</div>';
+    $('#summaryItems').innerHTML = cart.length ? L.map((l,i)=>rowHTML(l,i,false)).join('') : empty;
+    $('#drawerItems').innerHTML = cart.length ? L.map((l,i)=>rowHTML(l,i,true)).join('') : empty;
+    $('#sumSub').textContent=money(sub);
+    $('#sumShip').textContent=sub===0?money(0):(ship===0?'Free':money(ship));
+    $('#sumTotal').textContent=money(Math.max(0,sub-disc)+ship+gift);
+    if(disc>0){$('#discountRow').hidden=false;$('#sumDiscount').textContent='-'+money(disc)} else {$('#discountRow').hidden=true}
+    if(gift>0){$('#giftRow').hidden=false;$('#sumGift').textContent=money(gift)} else {$('#giftRow').hidden=true}
+    const msg = sub===0 ? `Shipping offers confirmed for your destination` : sub>=FREE_SHIP_MIN ? 'You have unlocked free shipping' : `Add ${money(FREE_SHIP_MIN-sub)} more for free shipping`;
+    $('#shipNote').textContent = sub>0 ? msg+'.' : '';
+    $('#etaNote').textContent = sub>0 ? `Estimated delivery: ${ETA[countrySel.value]||ETA.OTHER}.` : '';
+    $('#drawerShipMsg').textContent=msg; $('#drawerBar').style.width=Math.min(100,sub/FREE_SHIP_MIN*100)+'%'; $('#drawerSub').textContent=money(sub);
+    const ups=products.filter(p=>p.cat==='accessories'&&!cart.some(i=>i.id===p.id)).slice(0,2);
+    $('#drawerUpsell').innerHTML = cart.length&&ups.length ? '<h3>Complete the look</h3>'+ups.map(p=>`<div class="up-row"><div class="thumb"><img src="${p.img}" alt="" width="44" height="55" onerror="this.src='${PH}'"></div><span class="nm">${esc(p.name)}<br><small>${money(p.price)}</small></span><button type="button" data-up="${p.id}">Add</button></div>`).join('') : '';
+  }
+  function cartClick(e){
+    const b=e.target.closest('[data-act]'); if(!b || b.disabled) return;
+    const i=+b.dataset.i, a=b.dataset.act;
+    if(!cart[i]) return;
+    if(a==='inc'){const p=products.find(x=>x.id===cart[i].id); const max=p.stock||99; cart[i].qty=Math.min(max,cart[i].qty+1)}
+    else if(a==='dec'){ if(--cart[i].qty<=0) cart.splice(i,1); }
+    else cart.splice(i,1);
+    updateCart();
+  }
+
+  function addToCart(id,size){
+    const p=products.find(x=>x.id===id);
+    if(!p||p.stock===0){toast('This item is sold out.');return}
+    const ex=cart.find(i=>i.id===id&&i.size===size);
+    if(ex){ if(ex.qty>=(p.stock||99)){toast('Maximum available quantity reached');return} ex.qty++ }
+    else cart.push({id,size,qty:1});
+    updateCart(); toast(`${p.name} (${size}) added to cart`);
+  }
+
+  /* ===== Filter + render ===== */
+  function matchesFilters(p){
+    if(search && !p.name.toLowerCase().includes(search)) return false;
+    if(priceBand==='under100' && p.price>=10000) return false;
+    if(priceBand==='100to200' && (p.price<10000||p.price>20000)) return false;
+    if(priceBand==='over200' && p.price<=20000) return false;
+    if(sizeBand!=='all' && !sizesFor(p).includes(sizeBand)) return false;
+    return true;
+  }
+
+  function renderProducts(){
+    let list = filter==='sale' ? products.filter(p=>p.was) : (filter && filter!=='new') ? products.filter(p=>p.cat===filter) : products.slice();
+    list = list.filter(matchesFilters);
+    if(sortMode==='low') list.sort((a,b)=>a.price-b.price); else if(sortMode==='high') list.sort((a,b)=>b.price-a.price);
+    $('#productTitle').textContent = TITLES[filter] || 'Fresh Styles, Just In';
+
+    $('#productGrid').innerHTML = list.length ? list.map(p=>{
+      const sizes=sizesFor(p), on=wishlist.has(p.id), soldout=p.stock===0;
+      const badge = p.was ? '<span class="product-badge">Sale</span>' : (p.flag ? `<span class="product-badge">${p.flag}</span>` : '');
+      const flag = soldout ? '<span class="product-flag">Sold out</span>' : '';
+      const swatches = p.colors ? `<div class="swatches">${p.colors.map(c=>`<span class="swatch" style="background:${c}" aria-hidden="true"></span>`).join('')}</div>` : '';
+      const stockNote = (!soldout && p.stock && p.stock<=5) ? `<span class="stock-note">Only ${p.stock} left</span>` : '';
+      return `<article class="product-card${soldout?' soldout':''}">
+        <div class="product-image">
+          <a href="#" class="product-link" data-qv="${p.id}" aria-label="View ${esc(p.name)}">
+            <img class="img1" loading="lazy" width="600" height="750" src="${p.img}" alt="${esc(p.name)}" onload="this.classList.add('loaded')" onerror="this.src='${PH}';this.classList.add('loaded')">
+            ${p.img2?`<img class="img2" loading="lazy" width="600" height="750" src="${p.img2}" alt="" onload="this.classList.add('loaded')" onerror="this.remove()">`:''}
+          </a>
+          ${badge}${flag}
+          <button class="wishlist-btn" type="button" data-wish="${p.id}" aria-pressed="${on}" aria-label="Save ${esc(p.name)} to wishlist"><i class="${on?'ri-heart-fill':'ri-heart-line'}" aria-hidden="true"></i></button>
+        </div>
+        <div class="product-info">
+          <a href="#" class="product-link" data-qv="${p.id}"><h3>${esc(p.name)}</h3></a>
+          <span class="product-price">${money(p.price)}${p.was?` <span class="original">${money(p.was)}</span>`:''}</span>
+          ${stockNote}${swatches}
+        </div>
+      </article>`;
+    }).join('') : '<p class="empty-grid">No items found. Try adjusting your filters.</p>';
+  }
+
+  function toggleWish(id){
+    const on=!wishlist.has(id); on?wishlist.add(id):wishlist.delete(id); save('kt_wish',[...wishlist]);
+    $$(`[data-wish="${id}"]`).forEach(b=>{b.setAttribute('aria-pressed',on);$('i',b).className=on?'ri-heart-fill':'ri-heart-line'});
+    const q=$('#qvWish'); if(q&&q.dataset.id==id) q.textContent=on?'Saved to wishlist':'Save to wishlist';
+    const wc=$('#wishCount'); wc.textContent=wishlist.size; wc.hidden=wishlist.size===0;
+    renderWishlist();
+    toast(on?'Added to wishlist':'Removed from wishlist');
+  }
+
+  function renderWishlist(){
+    const body=$('#wishBody');
+    if(!wishlist.size){ body.innerHTML='<p class="empty-cart-msg">Your wishlist is empty</p>'; return; }
+    body.innerHTML=[...wishlist].map(id=>{
+      const p=products.find(x=>x.id===id); if(!p) return '';
+      return `<div class="wish-item">
+        <div class="thumb"><img src="${p.img}" alt="" onerror="this.src='${PH}'"></div>
+        <div><div class="name">${esc(p.name)}</div><div class="price">${money(p.price)}</div></div>
+        <div class="actions">
+          <button type="button" data-wish-add="${p.id}">Add to cart</button>
+          <button type="button" class="rm" data-wish-rm="${p.id}">Remove</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderRecent(){
+    const strip=$('#recentStrip'), sec=$('#recentSection');
+    if(!recent.length){sec.hidden=true;return}
+    sec.hidden=false;
+    strip.innerHTML=recent.map(id=>{
+      const p=products.find(x=>x.id===id); if(!p) return '';
+      return `<button type="button" class="recent-card" data-qv="${p.id}"><img src="${p.img}" alt="" onerror="this.src='${PH}'"><span>${esc(p.name)}</span></button>`;
+    }).join('');
+  }
+  function trackView(id){
+    recent = [id, ...recent.filter(x=>x!==id)].slice(0,6);
+    save(RECENT_KEY, recent); renderRecent();
+  }
+
+  /* ===== Currency ===== */
   function setCurrency(code,manual=false){
     if(!FX[code]) code='USD';
     selectedCurrency=code; currencySel.value=code; navCurrency.value=code;
     if(manual) currencyManuallySelected=true;
-    renderProducts(); updateCart();
+    renderProducts(); updateCart(); renderWishlist();
   }
   function syncCurrencyFromCountry(){
     if(!currencyManuallySelected) setCurrency(COUNTRY_CONFIG[countrySel.value]?.currency || 'USD');
@@ -606,103 +876,107 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   }
   currencySel.addEventListener('change',()=>setCurrency(currencySel.value,true));
   navCurrency.addEventListener('change',()=>setCurrency(navCurrency.value,true));
-  const lines = () => cart.map(i=>({...i,p:products.find(p=>p.id===i.id)})).filter(l=>l.p);
-  const subtotal = () => lines().reduce((s,l)=>s+l.p.price*l.qty,0);
-  function shippingCost(sub){ if(sub===0||sub>=FREE_SHIP_MIN) return 0; return SHIPPING_USD_CENTS[countrySel.value] ?? SHIPPING_USD_CENTS.OTHER; }
-  function updatePaymentOptions(){
-    const options = countrySel.value==='KE'
-      ? ['M-Pesa (details confirmed on WhatsApp)','Bank transfer (details confirmed on WhatsApp)','Cash on delivery (if available)']
-      : ['Bank transfer (details confirmed on WhatsApp)','Card / online payment (if arranged separately)','Other method agreed on WhatsApp'];
-    $('#payment').innerHTML=options.map(x=>`<option>${x}</option>`).join('');
-  }
   countrySel.addEventListener('change',()=>{currencyManuallySelected=false;syncCurrencyFromCountry();updateCart()});
-  syncCurrencyFromCountry();
+  $('#giftwrap').addEventListener('change',updateCart);
 
-  const rowHTML=(l,i,thumb)=>`<div class="summary-item${thumb?' with-thumb':''}">${thumb?`<div class="thumb"><img src="${l.p.img}" alt="" width="64" height="80" onerror="this.remove()"></div>`:''}<div class="si-main"><span class="si-name">${esc(l.p.name)}</span> <small>(${esc(l.size)})</small>
-    <div class="item-controls"><button class="qty-btn" type="button" data-act="dec" data-i="${i}" aria-label="Decrease quantity of ${esc(l.p.name)}">&minus;</button><span class="qty-num">${l.qty}</span><button class="qty-btn" type="button" data-act="inc" data-i="${i}" aria-label="Increase quantity of ${esc(l.p.name)}">+</button><button class="remove-btn" type="button" data-act="rm" data-i="${i}" aria-label="Remove ${esc(l.p.name)}"><i class="ri-close-line" aria-hidden="true"></i></button></div></div><span class="line-total">${money(l.p.price*l.qty)}</span></div>`;
-  function updateCart(){
-    save('kt_cart',cart);
-    const n=cart.reduce((s,i)=>s+i.qty,0), badge=$('#cartCount');
-    badge.textContent=n; badge.hidden=n===0;
-    const sub=subtotal(), ship=shippingCost(sub), L=lines();
-    const empty='<div class="empty-cart-msg">Your cart is empty</div>';
-    $('#summaryItems').innerHTML = cart.length ? L.map((l,i)=>rowHTML(l,i,false)).join('') : empty;
-    $('#drawerItems').innerHTML = cart.length ? L.map((l,i)=>rowHTML(l,i,true)).join('') : empty;
-    $('#sumSub').textContent=money(sub); $('#sumShip').textContent=sub===0?money(0):(ship===0?'Free':money(ship)); $('#sumTotal').textContent=money(sub+ship);
-    const msg = sub===0 ? `Shipping offers confirmed for your destination` : sub>=FREE_SHIP_MIN ? 'You have unlocked free shipping' : `Add ${money(FREE_SHIP_MIN-sub)} more for free shipping`;
-    $('#shipNote').textContent = sub>0 ? msg+'.' : '';
-    $('#drawerShipMsg').textContent=msg; $('#drawerBar').style.width=Math.min(100,sub/FREE_SHIP_MIN*100)+'%'; $('#drawerSub').textContent=money(sub);
-    const ups=products.filter(p=>p.cat==='accessories'&&!cart.some(i=>i.id===p.id)).slice(0,2);
-    $('#drawerUpsell').innerHTML = cart.length&&ups.length ? '<h3>Complete the look</h3>'+ups.map(p=>`<div class="up-row"><div class="thumb"><img src="${p.img}" alt="" width="44" height="55" onerror="this.remove()"></div><span class="nm">${esc(p.name)}<br><small>${money(p.price)}</small></span><button type="button" data-up="${p.id}">Add</button></div>`).join('') : '';
-  }
-  function cartClick(e){
-    const b=e.target.closest('[data-act]'); if(!b) return;
-    const i=+b.dataset.i, a=b.dataset.act;
-    if(!cart[i]) return;
-    if(a==='inc') cart[i].qty=Math.min(99,cart[i].qty+1); else if(a==='dec'){ if(--cart[i].qty<=0) cart.splice(i,1); } else cart.splice(i,1);
-    updateCart();
-  }
+  /* ===== Filters ===== */
+  $('#searchInput').addEventListener('input', e=>{search=e.target.value.toLowerCase().trim();renderProducts()});
+  $('#priceFilter').addEventListener('change', e=>{priceBand=e.target.value;renderProducts()});
+  $('#sizeFilter').addEventListener('change', e=>{sizeBand=e.target.value;renderProducts()});
+  $('#clearFilters').addEventListener('click', ()=>{
+    search='';priceBand='all';sizeBand='all';
+    $('#searchInput').value='';$('#priceFilter').value='all';$('#sizeFilter').value='all';
+    renderProducts();
+  });
+
+  /* ===== Promo ===== */
+  $('#applyPromo').addEventListener('click', ()=>{
+    const code=$('#promo').value.trim().toUpperCase(), msg=$('#promoMsg');
+    if(!code){msg.textContent='Enter a promo code.';return}
+    if(PROMOS[code]){
+      appliedPromo={code,...PROMOS[code]};
+      msg.textContent=`Promo applied: ${appliedPromo.label}.`;
+      updateCart();
+    } else {
+      appliedPromo=null; msg.textContent='Invalid promo code.'; updateCart();
+    }
+  });
+
+  /* ===== Cart events ===== */
   $('#summaryItems').addEventListener('click',cartClick);
   $('#drawerItems').addEventListener('click',cartClick);
   $('#drawerUpsell').addEventListener('click',e=>{const b=e.target.closest('[data-up]');if(b){const p=products.find(x=>x.id===+b.dataset.up);addToCart(p.id,sizesFor(p)[0])}});
 
-  function addToCart(id,size){
-    const ex=cart.find(i=>i.id===id&&i.size===size);
-    if(ex) ex.qty=Math.min(99,ex.qty+1); else cart.push({id,size,qty:1});
-    updateCart(); toast(`${products.find(p=>p.id===id).name} (${size}) added to cart`);
-  }
-
-  /* ===== Products ===== */
-  const TITLES={sale:'Sale: Best Deals',men:"Men's Collection",women:"Women's Collection",accessories:'Accessories'};
-  let sortMode='feat';
-  function renderProducts(){
-    let list = filter==='sale' ? products.filter(p=>p.was) : (filter && filter!=='new') ? products.filter(p=>p.cat===filter) : products.slice();
-    if(sortMode==='low') list.sort((a,b)=>a.price-b.price); else if(sortMode==='high') list.sort((a,b)=>b.price-a.price);
-    $('#productTitle').textContent = TITLES[filter] || 'Fresh Styles, Just In';
-    $('#productGrid').innerHTML = list.length ? list.map(p=>{
-      const sizes=sizesFor(p), on=wishlist.has(p.id);
-      return `<article class="product-card"><div class="product-image" data-qv="${p.id}"><img class="img1" loading="lazy" width="600" height="750" src="${p.img}" alt="${esc(p.name)}" onload="this.classList.add('loaded')" onerror="this.remove()">${p.img2?`<img class="img2" loading="lazy" width="600" height="750" src="${p.img2}" alt="" onload="this.classList.add('loaded')" onerror="this.remove()">`:''}${p.was?'<span class="product-badge">Sale</span>':''}
-      <button class="wishlist-btn" type="button" data-wish="${p.id}" aria-pressed="${on}" aria-label="Save ${esc(p.name)} to wishlist"><i class="${on?'ri-heart-fill':'ri-heart-line'}" aria-hidden="true"></i></button>
-      <button class="quick-btn" type="button" data-qv="${p.id}" aria-label="Quick view ${esc(p.name)}">Quick view</button></div>
-      <div class="product-info"><h3 data-qv="${p.id}">${esc(p.name)}</h3><span class="product-price">${money(p.price)}${p.was?` <span class="original">${money(p.was)}</span>`:''}</span>
-      <label class="sr-only" for="size-${p.id}">Size for ${esc(p.name)}</label><select class="size-select" id="size-${p.id}" style="width:100%;margin-top:10px">${sizes.map(s=>`<option>${s}</option>`).join('')}</select>
-      <button class="add-to-cart-btn" type="button" data-add="${p.id}" style="margin-top:8px">Add to cart</button></div></article>`;
-    }).join('') : '<p class="empty-grid">No items found in this category yet. Check back soon.</p>';
-  }
-  function toggleWish(id){
-    const on=!wishlist.has(id); on?wishlist.add(id):wishlist.delete(id); save('kt_wish',[...wishlist]);
-    $$(`[data-wish="${id}"]`).forEach(b=>{b.setAttribute('aria-pressed',on);$('i',b).className=on?'ri-heart-fill':'ri-heart-line'});
-    const q=$('#qvWish'); if(q&&q.dataset.id==id) q.textContent=on?'Saved to wishlist':'Save to wishlist';
-    toast(on?'Added to wishlist':'Removed from wishlist');
-  }
+  /* ===== Product grid events ===== */
   $('#productGrid').addEventListener('click',e=>{
-    const w=e.target.closest('[data-wish]'); if(w){e.stopPropagation();return toggleWish(+w.dataset.wish)}
-    const add=e.target.closest('[data-add]'); if(add){const id=+add.dataset.add;return addToCart(id,$('#size-'+id).value)}
+    const w=e.target.closest('[data-wish]'); if(w){e.preventDefault();e.stopPropagation();return toggleWish(+w.dataset.wish)}
+    const q=e.target.closest('[data-qv]'); if(q){e.preventDefault();openQV(+q.dataset.qv)}
+  });
+  $('#recentStrip').addEventListener('click',e=>{
     const q=e.target.closest('[data-qv]'); if(q) openQV(+q.dataset.qv);
   });
-  /* TODO: replace with your real size chart (chest in cm) */
+
+  /* ===== Wishlist events ===== */
+  $('#wishBody').addEventListener('click', e=>{
+    const add=e.target.closest('[data-wish-add]');
+    const rm=e.target.closest('[data-wish-rm]');
+    if(add){ const p=products.find(x=>x.id===+add.dataset.wishAdd); if(p) addToCart(p.id, sizesFor(p)[0]); }
+    if(rm){ toggleWish(+rm.dataset.wishRm); }
+  });
+
+  /* ===== Quick View ===== */
   const SIZE_GUIDE=[['S','88 to 96'],['M','96 to 104'],['L','104 to 112'],['XL','112 to 120']];
+  let qvCurrentColor = null;
+
   function openQV(id){
-    const p=products.find(x=>x.id===id), sizes=sizesFor(p), on=wishlist.has(id);
-    // Optional per-product fields: p.desc (fabric, fit, care) and p.img2 (second photo for hover swap)
-    $('#qvImg').innerHTML=`<img src="${p.img}" alt="${esc(p.name)}" onerror="this.remove()">`+(p.img2?`<img src="${p.img2}" alt="${esc(p.name)}, alternate view" onerror="this.remove()">`:'');
-    $('#qvInfo').innerHTML=`<div class="section-subtitle">${esc(TITLES[p.cat]||'')}</div><h2 id="qvName">${esc(p.name)}</h2>
-    <p class="qv-price">${money(p.price)}${p.was?` <span class="original">${money(p.was)}</span>`:''}</p>${p.desc?`<p class="qv-desc">${esc(p.desc)}</p>`:''}
-    <label class="qv-label" for="qv-size">Size</label><select class="size-select" id="qv-size">${sizes.map(s=>`<option>${s}</option>`).join('')}</select>
-    ${p.cat!=='accessories'?`<details class="size-guide"><summary>Size guide</summary><table><tr><th>Size</th><th>Chest (cm)</th></tr>${SIZE_GUIDE.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table></details>`:''}
-    <button class="btn-primary qv-add" id="qvAdd" type="button" data-id="${id}">Add to cart</button>
-    <button class="qv-wish" id="qvWish" type="button" data-id="${id}">${on?'Saved to wishlist':'Save to wishlist'}</button>
-    <ul class="qv-points"><li>Shipping offers confirmed for your destination</li><li>Return terms confirmed before ordering</li><li>Order confirmed with you on WhatsApp</li></ul>`;
+    const p=products.find(x=>x.id===id); if(!p) return;
+    trackView(id);
+    const sizes=sizesFor(p), on=wishlist.has(id), soldout=p.stock===0;
+    qvCurrentColor = p.colors ? p.colors[0] : null;
+    const gallery = p.img2 ? [p.img, p.img2] : [p.img];
+    $('#qvImg').innerHTML = `
+      <img id="qvMain" src="${gallery[0]}" alt="${esc(p.name)}" onerror="this.src='${PH}'">
+      ${gallery.length>1?`<div class="qv-thumbs">${gallery.map((src,i)=>`<button type="button" class="qv-thumb${i===0?' active':''}" data-src="${src}"><img src="${src}" alt="" onerror="this.src='${PH}'"></button>`).join('')}</div>`:''}
+    `;
+    $('#qvInfo').innerHTML=`
+      <div class="section-subtitle">${esc(TITLES[p.cat]||'')}</div>
+      <h2 id="qvName">${esc(p.name)}</h2>
+      <p class="qv-price">${money(p.price)}${p.was?` <span class="original">${money(p.was)}</span>`:''}</p>
+      ${p.desc?`<p class="qv-desc">${esc(p.desc)}</p>`:''}
+      ${p.colors?`<label class="qv-label">Color</label><div id="qvColors">${p.colors.map((c,i)=>`<button type="button" class="qv-swatch${i===0?' active':''}" data-color="${c}" style="background:${c}" aria-label="Color ${i+1}"></button>`).join('')}</div>`:''}
+      <label class="qv-label" for="qv-size">Size</label><select class="size-select" id="qv-size" ${soldout?'disabled':''}>${sizes.map(s=>`<option>${s}</option>`).join('')}</select>
+      ${p.cat!=='accessories'?`<details class="size-guide"><summary>Size guide</summary><table><tr><th>Size</th><th>Chest (cm)</th></tr>${SIZE_GUIDE.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table></details>`:''}
+      ${soldout?'<p style="color:#B3261E;font-size:13px;margin-bottom:10px">This item is currently sold out.</p>':''}
+      <button class="btn-primary qv-add" id="qvAdd" type="button" data-id="${id}" ${soldout?'disabled':''}>${soldout?'Sold out':'Add to cart'}</button>
+      <button class="qv-wish" id="qvWish" type="button" data-id="${id}">${on?'Saved to wishlist':'Save to wishlist'}</button>
+      <button class="qv-share" id="qvShare" type="button" data-id="${id}">Share</button>
+      <ul class="qv-points"><li>Shipping offers confirmed for your destination</li><li>Return terms confirmed before ordering</li><li>Order confirmed with you on WhatsApp</li></ul>`;
     openLayer($('#qvOverlay'),$('#qv'),$('#closeQV'));
   }
   $('#qvInfo').addEventListener('click',e=>{
-    const a=e.target.closest('#qvAdd'), w=e.target.closest('#qvWish');
-    if(a){addToCart(+a.dataset.id,$('#qv-size').value);closeLayer($('#qvOverlay'));openDrawer()}
+    const a=e.target.closest('#qvAdd'), w=e.target.closest('#qvWish'), s=e.target.closest('#qvShare'), sw=e.target.closest('.qv-swatch');
+    if(a && !a.disabled){addToCart(+a.dataset.id,$('#qv-size').value);closeLayer($('#qvOverlay'));openDrawer()}
     if(w) toggleWish(+w.dataset.id);
+    if(sw){ qvCurrentColor=sw.dataset.color; $$('.qv-swatch').forEach(x=>x.classList.toggle('active',x===sw)); }
+    if(s){ shareProduct(+s.dataset.id); }
+  });
+  $('#qvImg').addEventListener('click', e=>{
+    const t=e.target.closest('.qv-thumb'); if(!t) return;
+    $('#qvMain').src=t.dataset.src;
+    $$('.qv-thumb').forEach(b=>b.classList.toggle('active',b===t));
   });
   $('#closeQV').addEventListener('click',()=>closeLayer($('#qvOverlay')));
   $('#qvOverlay').addEventListener('click',e=>{if(e.target.id==='qvOverlay')closeLayer($('#qvOverlay'))});
-  $('#sortSel').addEventListener('change',e=>{sortMode=e.target.value;renderProducts()});
+
+  async function shareProduct(id){
+    const p=products.find(x=>x.id===id); if(!p) return;
+    const url = location.origin + location.pathname + '#product-' + p.id;
+    const data = {title:'KimTech — '+p.name, text:'Check this out: '+p.name, url};
+    if(navigator.share){ try{ await navigator.share(data); return; }catch(_){} }
+    window.open(`https://wa.me/?text=${encodeURIComponent(data.title+' — '+url)}`, '_blank');
+  }
+
+  /* ===== Navigation ===== */
   function go(section,scroll=true){
     filter = section==='new'?null:section; renderProducts();
     $('#navLinks').classList.remove('open'); $('#menuBtn').setAttribute('aria-expanded','false');
@@ -715,8 +989,9 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   $('#viewAllCategories').addEventListener('click',()=>{go('new',false);$('#categories').scrollIntoView({behavior:'smooth'})});
   $('#logoHome').addEventListener('click',e=>{e.preventDefault();go('new',false);window.scrollTo({top:0,behavior:'smooth'})});
   $('#menuBtn').addEventListener('click',()=>{const o=$('#navLinks').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)});
+  $('#sortSel').addEventListener('change',e=>{sortMode=e.target.value;renderProducts()});
 
-  /* ===== Layers: cart drawer, quick view, checkout ===== */
+  /* ===== Layers ===== */
   const layers=[];
   function openLayer(overlay,panel,focusEl){
     layers.push({overlay,panel,last:document.activeElement});
@@ -738,9 +1013,10 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
       else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
     }
   });
-  const overlay=$('#checkoutOverlay'), modal=$('#checkoutModal'), drawerOv=$('#drawerOverlay');
+  const overlay=$('#checkoutOverlay'), modal=$('#checkoutModal'), drawerOv=$('#drawerOverlay'), wishOv=$('#wishOverlay');
   modal.tabIndex=-1;
   function openDrawer(){updateCart();openLayer(drawerOv,$('#drawer'),$('#closeDrawer'))}
+  function openWishlist(){renderWishlist();openLayer(wishOv,$('#wishDrawer'),$('#closeWish'))}
   function openCheckout(){
     if(!cart.length){toast('Your cart is empty. Add items first.');return}
     modal.classList.remove('sent'); $('#formError').hidden=true; updateCart();
@@ -748,12 +1024,16 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
   }
   function closeCheckout(){closeLayer(overlay)}
   $('#cartIcon').addEventListener('click',openDrawer);
+  $('#wishIcon').addEventListener('click',openWishlist);
   $('#closeDrawer').addEventListener('click',()=>closeLayer(drawerOv));
   drawerOv.addEventListener('click',e=>{if(e.target===drawerOv)closeLayer(drawerOv)});
+  $('#closeWish').addEventListener('click',()=>closeLayer(wishOv));
+  wishOv.addEventListener('click',e=>{if(e.target===wishOv)closeLayer(wishOv)});
   $('#drawerCheckout').addEventListener('click',()=>{if(!cart.length){toast('Your cart is empty.');return}closeLayer(drawerOv);openCheckout()});
   $('#closeCheckout').addEventListener('click',closeCheckout);
   overlay.addEventListener('click',e=>{if(e.target===overlay)closeCheckout()});
 
+  /* ===== Checkout submission ===== */
   $('#checkoutForm').addEventListener('submit',e=>{
     e.preventDefault();
     const f=e.target, err=$('#formError'), v=n=>f.elements[n].value.trim();
@@ -763,25 +1043,45 @@ footer{background:var(--navy-primary);color:#fff;padding:60px 24px 30px;border-t
     const bad=['name','email','phone','address','city'].find(n=>!v(n)) || (!f.elements.email.checkValidity()?'email':null);
     if(bad){err.textContent = bad==='email'&&v('email') ? 'Please enter a valid email address.' : 'Please fill in all required fields.';err.hidden=false;f.elements[bad].focus();return}
     if(v('phone').replace(/\D/g,'').length<7){err.textContent='Please enter a valid phone number with country code.';err.hidden=false;f.elements.phone.focus();return}
-    const sub=subtotal(), ship=shippingCost(sub), total=sub+ship;
+
+    const sub=subtotal(), disc=discountUSD(sub), gift=giftWrapSelected()?GIFT_WRAP_USD_CENTS:0;
+    const ship=shippingCost(sub), total=Math.max(0,sub-disc)+ship+gift;
     const items=lines().map(l=>`- ${l.p.name} (${l.size}) x ${l.qty}: ${money(l.p.price*l.qty)}`).join('\n');
     const addr=[v('address'),[v('city'),v('zip')].filter(Boolean).join(' '),COUNTRY_CONFIG[f.elements.country.value]?.name || f.elements.country.value].filter(Boolean).join(', ');
-    const msg=`*New order enquiry — KimTech*\n\n*Name:* ${v('name')}\n*Email:* ${v('email')}\n*Phone:* ${v('phone')}\n*Address:* ${addr}\n*Preferred currency:* ${selectedCurrency}\n*Preferred payment:* ${f.elements.payment.value}${v('notes')?`\n*Notes:* ${v('notes')}`:''}\n\n*Items:*\n${items}\n\n*Subtotal:* ${money(sub)}\n*Estimated shipping:* ${ship===0?'Free':money(ship)}\n*Estimated total:* ${money(total)}\n\nPlease confirm availability, final price, delivery fee and payment instructions before I pay.`;
+    const extras=[];
+    if(appliedPromo) extras.push(`*Promo:* ${appliedPromo.code} (${appliedPromo.label})`);
+    if(disc>0) extras.push(`*Discount:* -${money(disc)}`);
+    if(gift>0) extras.push(`*Gift wrap:* ${money(gift)}`);
+    const eta = ETA[f.elements.country.value] || ETA.OTHER;
+    const msg=`*New order enquiry — KimTech*\n\n*Name:* ${v('name')}\n*Email:* ${v('email')}\n*Phone:* ${v('phone')}\n*Address:* ${addr}\n*Preferred currency:* ${selectedCurrency}\n*Preferred payment:* ${f.elements.payment.value}\n*Fit preference:* ${f.elements.fit.value}\n*Estimated delivery:* ${eta}${v('notes')?`\n*Notes:* ${v('notes')}`:''}\n\n*Items:*\n${items}\n\n*Subtotal:* ${money(sub)}${extras.length?'\n'+extras.join('\n'):''}\n*Estimated shipping:* ${ship===0?'Free':money(ship)}\n*Estimated total:* ${money(total)}\n\nPlease confirm availability, final price, delivery fee and payment instructions before I pay.`;
     const url=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
     $('#waLink').href=url; modal.classList.add('sent'); $('#orderSent').focus();
     const waWindow=window.open(url,'_blank','noopener');
     if(!waWindow) toast('Pop-up blocked. Use the Open WhatsApp button to continue.');
   });
-  $('#sentConfirm').addEventListener('click',()=>{cart=[];updateCart();$('#checkoutForm').reset();countrySel.value='KE';currencyManuallySelected=false;syncCurrencyFromCountry();closeCheckout();toast('Your cart has been cleared. We will confirm the order once your WhatsApp message is received.')});
+  $('#sentConfirm').addEventListener('click',()=>{
+    cart=[]; appliedPromo=null;
+    updateCart(); $('#checkoutForm').reset();
+    $('#promoMsg').textContent=''; $('#promo').value='';
+    countrySel.value='KE'; currencyManuallySelected=false; syncCurrencyFromCountry();
+    closeCheckout(); toast('Your cart has been cleared. We will confirm the order once your WhatsApp message is received.');
+  });
   $('#sentBack').addEventListener('click',()=>modal.classList.remove('sent'));
 
-  renderProducts(); updateCart();
-  /* gentle reveal on scroll */
+  /* ===== Reveal on scroll ===== */
   const rev=$$('.section,.promo-banner,.stats-bar,.feature-box');
   if('IntersectionObserver' in window){
     const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.06});
     rev.forEach(el=>{el.classList.add('reveal');io.observe(el)});
   }
+
+  /* ===== Init ===== */
+  syncCurrencyFromCountry();
+  renderProducts();
+  updateCart();
+  renderWishlist();
+  renderRecent();
+  const wc=$('#wishCount'); wc.textContent=wishlist.size; wc.hidden=wishlist.size===0;
 })();
 </script>
 </body>
